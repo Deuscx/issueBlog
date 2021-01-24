@@ -1,0 +1,43 @@
+{
+  "name": "issue-blog",
+  "version": "1.0.0",
+  "description": "create blog with github issue",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "cross-env NODE_ENV=development node src/index.js",
+    "lint": "eslint src/*  --ext .js --fix --color "
+  },
+  "keywords": [
+    "github_issue"
+  ],
+  "author": "deuscx <1475453714@qq.com> (https://github.com/Deuscx)",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "cross-env": "^7.0.3",
+    "cross-fetch": "^3.0.6",
+    "dotenv": "^8.2.0",
+    "execa": "^5.0.0",
+    "fs-extra": "^9.1.0",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "gray-matter": "^4.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js?(x)": [
+      "eslint --fix --color"
+    ]
+  }
+}
