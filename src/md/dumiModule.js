@@ -14,7 +14,7 @@ module.exports =  class DumiMd extends BaseMd{
 
     async beforeGenerate(){
        fs.ensureDirSync(this.docsRootDir);
-       await executeCommand('yarn',["create","@umijs/create-dumi-app"], this.docsRootDir );
+       await executeCommand('yarn',["create","@umijs/dumi-lib"], this.docsRootDir );
        fs.emptyDirSync( this.docsDir);
     }
 
