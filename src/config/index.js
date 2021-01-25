@@ -4,5 +4,9 @@ module.exports =  {
     //仓库名
     repository: 'issueBlog',
     //指定markdown生成器
-    docType: "dumi",    
+    docType: "dumi", 
+    //指定markdown生成器的原生配置
+    docConfig:{
+
+    }  
 }

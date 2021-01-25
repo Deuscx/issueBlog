@@ -1,9 +1,10 @@
+const path =require('path');
+const fs = require('fs-extra');
+const ejs =require('ejs');
 const BaseMd = require("./baseModule");
 const {executeCommand} = require('../util/packageUtil');
 const { rootPath} = require('../util/fileUtils');
-const path =require('path');
-const fs = require('fs-extra');
-
+const userConfig = require("../config/index")
 const isPlainObject = (obj)=> obj !== null && typeof obj === 'object' && !Object.keys(obj).length
 module.exports =  class DumiMd extends BaseMd{
     constructor({name}={name: 'dumi'}){
@@ -19,7 +20,21 @@ module.exports =  class DumiMd extends BaseMd{
     }
 
     async afterGenerate(){
-        //生成md文件之后
+        //修改config配置
+        const defaultConfig = {
+            title: userConfig.repository,
+            mode: 'site',
+        }
+        const userDocConfig = userConfig.docConfig ? userConfig.docConfig : {}
+        const config = Object.assign(defaultConfig,{
+            base: `/${userConfig.repository}`,
+            publicPath: `/${userConfig.repository}/`,
+        },userDocConfig)
+        const content = fs.readFileSync(path.resolve(__dirname,"./dumiConfig/.umirc.ejs"),{encoding: "utf-8"});
+        let renderData = ejs.render(content, {moreConfig: JSON.stringify(config,null,2)})
+        //写入配置文件
+        fs.writeFileSync(path.resolve(this.docsRootDir,".umirc.ts"),renderData);
+        //生成md文件之后   
         await executeCommand('yarn',[], this.docsRootDir );
         await executeCommand("yarn",["run","docs:build"],this.docsRootDir);
     }
