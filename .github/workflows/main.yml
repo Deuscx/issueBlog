@@ -12,8 +12,6 @@ jobs:
             TOKEN=${AUTH_TOKEN} yarn run start
         env:
           AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        with:
-          AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - run: |
             cd ./docs
             yarn
