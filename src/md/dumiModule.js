@@ -21,7 +21,7 @@ module.exports =  class DumiMd extends BaseMd{
     async afterGenerate(){
         //生成md文件之后
         await executeCommand('yarn',[], this.docsRootDir );
-        await executeCommand("yarn",["run","build"],this.docsRootDir);
+        await executeCommand("yarn",["run","docs:build"],this.docsRootDir);
     }
 
     async run({issues}){
