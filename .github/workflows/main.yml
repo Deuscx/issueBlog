@@ -12,10 +12,10 @@ jobs:
             TOKEN=${AUTH_TOKEN} yarn run start
         env:
           AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      - run: |
-            cd ./docs
-            yarn
-            yarn run build
+      # - run: |
+      #       cd ./docs
+      #       yarn
+      #       yarn run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

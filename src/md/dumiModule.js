@@ -36,7 +36,7 @@ module.exports =  class DumiMd extends BaseMd{
         fs.writeFileSync(path.resolve(this.docsRootDir,".umirc.ts"),renderData);
         //生成md文件之后   
         await executeCommand('yarn',[], this.docsRootDir );
-        await executeCommand("yarn",["run","docs:build"],this.docsRootDir);
+        await executeCommand("yarn",["run","build"],this.docsRootDir);
     }
 
     async run({issues}){
